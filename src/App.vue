@@ -11,6 +11,7 @@
     <div v-if="showCard">
       <p>Your Balance is : {{ Balance }} (wei)</p>
     </div>
+    <small>made with vue</small>
   </div>
 </template>
 
