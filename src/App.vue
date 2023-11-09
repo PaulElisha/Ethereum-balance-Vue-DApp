@@ -74,4 +74,8 @@ p {
   width: 420px;
   padding: 40px;
 }
+small {
+  text-align: center;
+  margin-top: 50px;
+}
 </style>
