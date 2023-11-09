@@ -2,6 +2,7 @@
   <div class="App">
     <nav>
       <h2>check your wallet balance</h2>
+      <small>made with vue</small>
       <input
         placeholder="check address balance"
         v-model.trim="address"
@@ -11,7 +12,6 @@
     <div v-if="showCard">
       <p>Your Balance is : {{ Balance }} (wei)</p>
     </div>
-    <small>made with vue</small>
   </div>
 </template>
 
@@ -74,8 +74,8 @@ p {
   width: 420px;
   padding: 40px;
 }
+
 small {
-  text-align: center;
-  margin-top: 50px;
+  color: white;
 }
 </style>
