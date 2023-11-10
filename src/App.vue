@@ -1,7 +1,7 @@
 <template>
   <div class="App">
     <nav>
-      <h2>check your wallet balance</h2>
+      <h2>token balance checker</h2>
       <small>made with vue</small>
       <input
         placeholder="check address balance"
@@ -10,25 +10,34 @@
       />
     </nav>
     <div v-if="showCard">
-      <p>Your Balance is : {{ Balance }} (wei)</p>
+      <p>Your Balance is : {{ formattedBalance }} Eth</p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ethers } from "ethers";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const address = ref("");
 const Balance = ref("");
 const showCard = ref(false);
+const formattedBalance = ref("");
 
 const main = async () => {
   const AlchemyApi =
     "https://eth-mainnet.g.alchemy.com/v2/4bYmhhbr7JU_nSwRzi6Wjaf08t4a22is";
   const provider = new ethers.JsonRpcProvider(AlchemyApi);
 
-  Balance.value = await provider.getBalance(address.value);
+  if (!ethers.isAddress(address.value)) return;
+
+  const bal = await provider.getBalance(address.value);
+
+  formattedBalance.value = computed(() => {
+    Balance.value = ethers.formatEther(bal);
+    return parseFloat(parseFloat(Balance.value).toFixed(2));
+  });
+
   showCard.value = true;
   address.value = "";
 };
